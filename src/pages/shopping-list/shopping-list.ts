@@ -8,15 +8,28 @@ import { Ingredient } from "../../models/ingredient";
   templateUrl: 'shopping-list.html',
 })
 export class ShoppingList {
-  constructor(private shoppingListService: ShoppingListService){
+  listItems: Ingredient[];
 
-  }
+  constructor(private shoppingListService: ShoppingListService){  }
 
  onAddItem(form: NgForm){
-  var name= form.controls.ingredientName.value;
-  var amount= form.controls.amount.value;
-  var ingredient = new Ingredient(name,amount);
-  this.shoppingListService.addItem(ingredient);
-  console.log(this.shoppingListService.getItems());
+  this.shoppingListService.addItem(new Ingredient(form.value.ingredientName,form.value.amount));
+
+  form.reset();
+
+  this.loadItems();
+ }
+
+ ionViewWillEnter(){
+   this.loadItems();
+ }
+
+ private loadItems(){
+   this.listItems = this.shoppingListService.getItems();
+ }
+ 
+ removeItemByIndex(index: number){
+   this.shoppingListService.removeItemByIndex(index);
+   this.loadItems();
  }
 }

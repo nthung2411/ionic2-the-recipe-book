@@ -17,13 +17,17 @@ export class ShoppingListService {
         //this.ingredients.push(...ingredients); //add range of items into array (supported by typescript)
     }
 
-    removeItem(ingredient){
+    removeItem(ingredient: Ingredient){
         var index = this.getItem(ingredient.name);
         this.ingredients.splice(index, 1);
     }
 
+    removeItemByIndex(index: number){
+        this.ingredients.splice(index, 1);
+    }
+
     getItems(){
-        return this.ingredients;
+        return this.ingredients.slice();//return replicated array, not original one.
     }
 
     getItem(name: string): number{

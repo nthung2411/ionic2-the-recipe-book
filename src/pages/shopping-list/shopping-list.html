@@ -30,4 +30,10 @@
             block
             [disabled]="!f.valid">Add Item</button>
   </form>
+  <hr>
+  <ion-list>
+    <ion-item *ngFor="let item of listItems; let index = i" (tap)="removeItemByIndex(index)">
+      {{item.name}} ({{item.amount}})
+    </ion-item>
+  </ion-list>
 </ion-content>
