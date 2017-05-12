@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { ShoppingList } from "../pages/shopping-list/shopping-list";
 import { Recipes } from "../pages/recipes/recipes";
-import { Recipe } from "../pages/recipe/recipe";
+import { RecipePage } from "../pages/recipe/recipe";
 import { EditRecipe } from "../pages/edit-recipe/edit-recipe";
 import { TabsPage } from "../pages/tabs/tabs";
 import { ShoppingListService } from "../services/shopping-list";
@@ -19,7 +19,7 @@ import { RecipesService } from "../services/recipes";
     TabsPage,
     ShoppingList,
     Recipes,
-    Recipe,
+    RecipePage,
     EditRecipe
   ],
   imports: [
@@ -32,7 +32,7 @@ import { RecipesService } from "../services/recipes";
     TabsPage,
     ShoppingList,
     Recipes,
-    Recipe,
+    RecipePage,
     EditRecipe
   ],
   providers: [

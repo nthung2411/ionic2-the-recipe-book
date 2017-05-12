@@ -5,20 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>recipe</ion-title>
+    <ion-title>{{ recipe.title }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-  <ion-grid>
+  <ion-grid text-center>
     <ion-row>
       <ion-col>
         <h2>{{recipe.title}}</h2>
-        <div>{{recipe.difficulty}}</div>
+        <p class="subtitle">{{recipe.difficulty}}</p>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -29,6 +26,9 @@
     <ion-row>
       <ion-col>
         <ion-list>
+          <ion-list-header>
+            Ingredients
+          </ion-list-header>
           <ion-item *ngFor="let ingredient of recipe.ingredients; let i = index;">
             {{ingredient.name}} ({{ingredient.amount}})
           </ion-item>
@@ -39,6 +39,7 @@
       <ion-col>
         <button ion-button
                 clear
+                block
                 (tap)="onAddIngredientsToShoppingList()">Add ingredients to Shopping List</button>
       </ion-col>
     </ion-row>
