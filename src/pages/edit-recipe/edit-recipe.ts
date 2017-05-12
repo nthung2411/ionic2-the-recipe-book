@@ -8,16 +8,19 @@ import { IonicPage,
 import { FormGroup } from "@angular/forms/";
 import { FormControl, Validators, FormArray } from "@angular/forms/";
 import { RecipesService } from "../../services/recipes";
+import { Recipe } from "../../models/recipe";
 
 @IonicPage()
 @Component({
   selector: 'page-edit-recipe',
   templateUrl: 'edit-recipe.html',
 })
-export class EditRecipe implements OnInit {  
+export class EditRecipe implements OnInit {
   mode = 'New';
   selectOptions = ['Easy', 'Medium', 'Hard'];
   recipeForm: FormGroup;
+  recipe: Recipe;
+  index: number;
 
   constructor(private navParams: NavParams,
               private actionSheetCtrl: ActionSheetController,
@@ -28,15 +31,31 @@ export class EditRecipe implements OnInit {
 
   ngOnInit(): void {
    this.mode = this.navParams.get('mode');
+   if(this.mode === 'Edit'){
+     this.recipe = this.navParams.get('recipe');
+     this.index = this.navParams.get('index');
+   }
    this.initializeForm();
   }
 
   private initializeForm(){
+    let title=null;
+    let description = null;
+    let difficulty = 'Medium';
+    let ingredients = [];
+    if(this.mode==='Edit'){
+      title = this.recipe.title;
+      description = this.recipe.description;
+      difficulty = this.recipe.difficulty;
+      for(let ingredient of this.recipe.ingredients){
+        ingredients.push(new FormControl(ingredient.name, Validators.required));        
+      }
+    }
     this.recipeForm = new FormGroup({
-      'title': new FormControl(null, Validators.required),
-      'description': new FormControl(null, Validators.required),
-      'difficulty': new FormControl('Medium'),
-      'ingredients': new FormArray([])
+      'title': new FormControl(title, Validators.required),
+      'description': new FormControl(description, Validators.required),
+      'difficulty': new FormControl(difficulty),
+      'ingredients': new FormArray(ingredients)
     });
   }
 
@@ -48,8 +67,13 @@ export class EditRecipe implements OnInit {
         return {name: name, amount: 1}
       });
     }
-    this.recipesService.addRecipe(values.title,values.description,values.difficulty,ingredients);
-    console.log(this.recipesService.getRecipes());
+    if(this.mode === 'Edit'){
+      this.recipesService.editRecipe(values.title,values.description,values.difficulty,ingredients, this.index);
+    }
+    else
+    {
+      this.recipesService.addRecipe(values.title,values.description,values.difficulty,ingredients);
+    }    
     this.navCtrl.popToRoot();
   }
 

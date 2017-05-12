@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Recipe } from "../../models/recipe";
+import { EditRecipe } from "../edit-recipe/edit-recipe";
 
 @IonicPage()
 @Component({
@@ -19,7 +20,7 @@ export class RecipePage implements OnInit {
     this.index = this.navParams.get('index');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Recipe');
-  }  
+  onEditRecipe(){
+    this.navCtrl.push(EditRecipe, {mode: 'Edit', recipe: this.recipe, index: this.index});
+  }
 }
