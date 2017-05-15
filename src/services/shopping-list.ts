@@ -1,37 +1,38 @@
-import { Ingredient } from "../models/ingredient";
+import { Ingredient } from '../models/ingredient';
 
 export class ShoppingListService {
     private ingredients: Ingredient[] = [];
 
-    addItem(ingredient: Ingredient){
-        if(this.getItem(ingredient.name) !==-1) return;
+    addItem(ingredient: Ingredient): void {
+        if (this.getItem(ingredient.name) !== -1) { return; }
         this.ingredients.push(ingredient);
     }
 
-    addItems(ingredients: Ingredient[]) {
-        for(var index = 0; index<ingredients.length;index++){
-            var ingredient = ingredients[index];
-            if(this.getItem(ingredient.name) !== -1) continue;
+    addItems(ingredients: Ingredient[]): void  {
+        for (let index = 0; index < ingredients.length; index++) {
+            let ingredient = ingredients[index];
+            if (this.getItem(ingredient.name) !== -1) {continue; }
             this.ingredients.push(ingredient);
         }
-        //this.ingredients.push(...ingredients); //add range of items into array (supported by typescript)
+        // add range of items into array (supported by typescript)
+        // this.ingredients.push(...ingredients); 
     }
 
-    removeItem(ingredient: Ingredient){
-        var index = this.getItem(ingredient.name);
+    removeItem(ingredient: Ingredient): void {
+        let index = this.getItem(ingredient.name);
         this.ingredients.splice(index, 1);
     }
 
-    removeItemByIndex(index: number){
+    removeItemByIndex(index: number): void {
         this.ingredients.splice(index, 1);
     }
 
-    getItems(){
-        return this.ingredients.slice();//return replicated array, not original one.
+    getItems(): Ingredient[] {
+        return this.ingredients.slice(); // return replicated array, not original one.
     }
 
-    getItem(name: string): number{
-        var index = this.ingredients.findIndex((element) => {
+    getItem(name: string): number {
+        let index = this.ingredients.findIndex((element) => {
             return name === element.name;
         });
         return index;

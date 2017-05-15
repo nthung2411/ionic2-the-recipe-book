@@ -17,7 +17,7 @@ export class SignupPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad(): void  {
     console.log('ionViewDidLoad Signup');
   }
 

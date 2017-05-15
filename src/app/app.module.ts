@@ -5,15 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { ShoppingList } from "../pages/shopping-list/shopping-list";
-import { Recipes } from "../pages/recipes/recipes";
-import { RecipePage } from "../pages/recipe/recipe";
-import { EditRecipe } from "../pages/edit-recipe/edit-recipe";
-import { TabsPage } from "../pages/tabs/tabs";
-import { ShoppingListService } from "../services/shopping-list";
-import { RecipesService } from "../services/recipes";
-import { SignupPage } from "../pages/signup/signup";
-import { SigninPage } from "../pages/signin/signin";
+import { ShoppingList } from '../pages/shopping-list/shopping-list';
+import { Recipes } from '../pages/recipes/recipes';
+import { RecipePage } from '../pages/recipe/recipe';
+import { EditRecipe } from '../pages/edit-recipe/edit-recipe';
+import { TabsPage } from '../pages/tabs/tabs';
+import { ShoppingListService } from '../services/shopping-list';
+import { RecipesService } from '../services/recipes';
+import { SignupPage } from '../pages/signup/signup';
+import { SigninPage } from '../pages/signin/signin';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { SigninPage } from "../pages/signin/signin";
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
+  // tslint:disable-next-line:object-literal-sort-keys
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
@@ -45,7 +46,6 @@ import { SigninPage } from "../pages/signin/signin";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ShoppingListService,
-    RecipesService
-  ]
+    RecipesService],
 })
 export class AppModule {}

@@ -1,17 +1,17 @@
-import { Recipe } from "../models/recipe";
-import { Ingredient } from "../models/ingredient";
+import { Recipe } from '../models/recipe';
+import { Ingredient } from '../models/ingredient';
 
 export class RecipesService {
-    private recipes: Recipe[]=[];
+    private recipes: Recipe[] = [];
 
     addRecipe(title: string,
               description: string,
               difficulty: string,
-              ingredients: Ingredient[]){
-        this.recipes.push(new Recipe(title,description,difficulty,ingredients));
+              ingredients: Ingredient[]): void {
+        this.recipes.push(new Recipe(title, description, difficulty, ingredients));
     }
 
-    getRecipes(){
+    getRecipes(): Recipe[] {
         return this.recipes.slice();
     }
 
@@ -19,12 +19,12 @@ export class RecipesService {
                description: string,
                difficulty: string,
                ingredients: Ingredient[],
-               index: number){
-        this.recipes[index] = new Recipe(title,description,difficulty,ingredients);
+               index: number): void {
+        this.recipes[index] = new Recipe(title, description, difficulty, ingredients);
     }
 
-    removeRecipe(index: number){
-        this.recipes.splice(index,1);
+    removeRecipe(index: number): void {
+        this.recipes.splice(index, 1);
         this.recipes = this.getRecipes();
     }
 }
