@@ -24,7 +24,7 @@ import { SigninPage } from '../pages/signin/signin';
     RecipePage,
     EditRecipe,
     SignupPage,
-    SigninPage
+    SigninPage,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +39,8 @@ import { SigninPage } from '../pages/signin/signin';
     Recipes,
     RecipePage,
     EditRecipe,
-    SigninPage
+    SignupPage,
+    SigninPage,
   ],
   providers: [
     StatusBar,

@@ -5,14 +5,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
+import { Recipes } from '../pages/recipes/recipes';
 
 @Component({
   templateUrl: 'app.html',
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage: any = TabsPage;
   @ViewChild('nav') nav: NavController;
-
+  recipesPage: any = Recipes;
   signinPage: any = SigninPage;
   signupPage: any = SignupPage;
 
@@ -28,12 +29,12 @@ export class MyApp {
     });
   }
 
-  private onLoad(page: any): void{
+  private onLoad(page: any): void {
+    this.nav.setRoot(page);
     this.menuCtrl.close();
-    this.nav.push(page);
   }
 
-  private onLogout(): void{
+  private onLogout(): void {
     console.log('log out');
   }
 }

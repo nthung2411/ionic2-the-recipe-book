@@ -9,8 +9,9 @@ import { SignupPage } from './signup';
   imports: [
     IonicPageModule.forChild(SignupPage),
   ],
+  // tslint:disable-next-line:object-literal-sort-keys
   exports: [
-    SignupPage
-  ]
+    SignupPage,
+  ],
 })
 export class SignupModule {}
