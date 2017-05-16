@@ -5,10 +5,10 @@ import { IonicPage,
          AlertController, 
          ToastController, NavController
 } from 'ionic-angular';
-import { FormGroup } from "@angular/forms/";
-import { FormControl, Validators, FormArray } from "@angular/forms/";
-import { RecipesService } from "../../services/recipes";
-import { Recipe } from "../../models/recipe";
+import { FormGroup } from '@angular/forms/';
+import { FormControl, Validators, FormArray } from '@angular/forms/';
+import { RecipesService } from '../../services/recipes';
+import { Recipe } from '../../models/recipe';
 
 @IonicPage()
 @Component({
