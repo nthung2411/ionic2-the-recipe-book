@@ -6,6 +6,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { Recipes } from '../pages/recipes/recipes';
+import firebase from 'firebase';
 
 @Component({
   templateUrl: 'app.html',
@@ -16,11 +17,26 @@ export class MyApp {
   recipesPage: any = Recipes;
   signinPage: any = SigninPage;
   signupPage: any = SignupPage;
+  isAuthenticated = false;
 
   constructor(platform: Platform,
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               private menuCtrl: MenuController) {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyA1jkgJvujmol54Wlz6HWe2-xfdBecJZUU',
+      authDomain: 'fir-login-9a00a.firebaseapp.com',
+    });
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.isAuthenticated = true;
+          this.nav.setRoot(this.rootPage);
+        } else {
+          this.isAuthenticated = false;
+          this.nav.setRoot(this.signinPage);
+        }
+      }
+    );
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -38,4 +54,3 @@ export class MyApp {
     console.log('log out');
   }
 }
-
