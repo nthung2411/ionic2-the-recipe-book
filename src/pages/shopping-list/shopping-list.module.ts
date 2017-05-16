@@ -9,9 +9,8 @@ import { ShoppingList } from './shopping-list';
   imports: [
     IonicPageModule.forChild(ShoppingList),
   ],
-  // tslint:disable-next-line:object-literal-sort-keys
   exports: [
     ShoppingList,
   ]
 })
-export class ShoppingListModule {}
+export class ShoppingListModule { }

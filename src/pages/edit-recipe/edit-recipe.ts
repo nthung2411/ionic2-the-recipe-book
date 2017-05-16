@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, 
-         NavParams, 
-         ActionSheetController, 
-         AlertController, 
-         ToastController, NavController
+import {
+  IonicPage,
+  NavParams,
+  ActionSheetController,
+  AlertController,
+  ToastController, NavController
 } from 'ionic-angular';
 import { FormGroup } from '@angular/forms/';
 import { FormControl, Validators, FormArray } from '@angular/forms/';
@@ -23,32 +24,32 @@ export class EditRecipe implements OnInit {
   index: number;
 
   constructor(private navParams: NavParams,
-              private actionSheetCtrl: ActionSheetController,
-              private alertCtrl: AlertController,
-              private toastCtrl: ToastController,
-              private recipesService: RecipesService,
-              private navCtrl: NavController) { }
+    private actionSheetCtrl: ActionSheetController,
+    private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
+    private recipesService: RecipesService,
+    private navCtrl: NavController) { }
 
   ngOnInit(): void {
-   this.mode = this.navParams.get('mode');
-   if(this.mode === 'Edit'){
-     this.recipe = this.navParams.get('recipe');
-     this.index = this.navParams.get('index');
-   }
-   this.initializeForm();
+    this.mode = this.navParams.get('mode');
+    if (this.mode === 'Edit') {
+      this.recipe = this.navParams.get('recipe');
+      this.index = this.navParams.get('index');
+    }
+    this.initializeForm();
   }
 
-  private initializeForm(){
-    let title=null;
+  private initializeForm() {
+    let title = null;
     let description = null;
     let difficulty = 'Medium';
     let ingredients = [];
-    if(this.mode==='Edit'){
+    if (this.mode === 'Edit') {
       title = this.recipe.title;
       description = this.recipe.description;
       difficulty = this.recipe.difficulty;
-      for(let ingredient of this.recipe.ingredients){
-        ingredients.push(new FormControl(ingredient.name, Validators.required));        
+      for (let ingredient of this.recipe.ingredients) {
+        ingredients.push(new FormControl(ingredient.name, Validators.required));
       }
     }
     this.recipeForm = new FormGroup({
@@ -59,32 +60,31 @@ export class EditRecipe implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     const values = this.recipeForm.value;
     let ingredients = [];
-    if(values.ingredients.length > 0) {
-      ingredients = values.ingredients.map(name=>{
-        return {name: name, amount: 1}
+    if (values.ingredients.length > 0) {
+      ingredients = values.ingredients.map(name => {
+        return { name: name, amount: 1 }
       });
     }
-    if(this.mode === 'Edit'){
-      this.recipesService.editRecipe(values.title,values.description,values.difficulty,ingredients, this.index);
+    if (this.mode === 'Edit') {
+      this.recipesService.editRecipe(values.title, values.description, values.difficulty, ingredients, this.index);
     }
-    else
-    {
-      this.recipesService.addRecipe(values.title,values.description,values.difficulty,ingredients);
-    }    
+    else {
+      this.recipesService.addRecipe(values.title, values.description, values.difficulty, ingredients);
+    }
     this.navCtrl.popToRoot();
   }
 
-  private createNewIngredientAlert(){
+  private createNewIngredientAlert() {
     return this.alertCtrl.create({
       title: 'Add Ingredient',
       inputs: [
         {
           name: 'name',
           placeholder: 'Name'
-        }        
+        }
       ],
       buttons: [
         {
@@ -93,8 +93,8 @@ export class EditRecipe implements OnInit {
         },
         {
           text: 'Add',
-          handler: (data)=>{
-            if(data.name.trim() === '' || data.name === null){
+          handler: (data) => {
+            if (data.name.trim() === '' || data.name === null) {
               const toast = this.toastCtrl.create({
                 message: 'Please enter a valid value!',
                 duration: 1000,
@@ -108,51 +108,50 @@ export class EditRecipe implements OnInit {
                 data.name,
                 Validators.required
               ));
-              const toast = this.toastCtrl.create({
-                message: 'new ingredient added!',
-                duration: 1000,
-                position: 'bottom' //default is bottom
-              });
-              toast.present();
+            const toast = this.toastCtrl.create({
+              message: 'new ingredient added!',
+              duration: 1000,
+              position: 'bottom' //default is bottom
+            });
+            toast.present();
           }
         }
       ]
     });
   }
 
-  onManageIngredients(){
+  onManageIngredients() {
     const actionSheet = this.actionSheetCtrl.create({
       title: 'What do you want to do ?',
       buttons: [
         {
           text: 'Add Ingredient',
-          handler: ()=>{
+          handler: () => {
             this.createNewIngredientAlert().present();
           }
         },
         {
           text: 'Remove all Ingredients',
           role: 'destructive',
-          handler: ()=>{
-            const formArray: FormArray = <FormArray>this.recipeForm.get('ingredients');            
+          handler: () => {
+            const formArray: FormArray = <FormArray>this.recipeForm.get('ingredients');
             const length = formArray.length;
-            if(length===0)return;
-            for(let index = length - 1;index >= 0;index--)
-            {
+            if (length === 0) return;
+            for (let index = length - 1; index >= 0; index--) {
               formArray.removeAt(index);
             }
             const toast = this.toastCtrl.create({
-                message: 'all ingredients removed!',
-                duration: 1000,
-                position: 'top' //default is bottom
-              });
-              toast.present();
+              message: 'all ingredients removed!',
+              duration: 1000,
+              position: 'top' //default is bottom
+            });
+            toast.present();
           }
         },
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: ()=>{
+          handler: () => {
             console.log('cancel');
           }
         },

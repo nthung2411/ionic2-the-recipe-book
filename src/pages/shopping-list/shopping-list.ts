@@ -10,26 +10,26 @@ import { Ingredient } from '../../models/ingredient';
 export class ShoppingList {
   listItems: Ingredient[];
 
-  constructor(private shoppingListService: ShoppingListService){  }
+  constructor(private shoppingListService: ShoppingListService) { }
 
- onAddItem(form: NgForm): void {
-  this.shoppingListService.addItem(new Ingredient(form.value.ingredientName,form.value.amount));
+  onAddItem(form: NgForm): void {
+    this.shoppingListService.addItem(new Ingredient(form.value.ingredientName, form.value.amount));
 
-  form.reset();
+    form.reset();
 
-  this.loadItems();
- }
+    this.loadItems();
+  }
 
- ionViewWillEnter(): void {
-   this.loadItems();
- }
+  ionViewWillEnter(): void {
+    this.loadItems();
+  }
 
- private loadItems(): void {
-   this.listItems = this.shoppingListService.getItems();
- }
+  private loadItems(): void {
+    this.listItems = this.shoppingListService.getItems();
+  }
 
- private removeItemByIndex(index: number): void {
-   this.shoppingListService.removeItemByIndex(index);
-   this.loadItems();
- }
+  private removeItemByIndex(index: number): void {
+    this.shoppingListService.removeItemByIndex(index);
+    this.loadItems();
+  }
 }

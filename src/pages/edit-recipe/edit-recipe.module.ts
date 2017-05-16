@@ -13,4 +13,4 @@ import { EditRecipe } from './edit-recipe';
     EditRecipe
   ]
 })
-export class EditRecipeModule {}
+export class EditRecipeModule { }

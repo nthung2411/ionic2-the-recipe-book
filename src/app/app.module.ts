@@ -31,7 +31,6 @@ import { AuthService } from '../services/auth';
     BrowserModule,
     IonicModule.forRoot(MyApp),
   ],
-  // tslint:disable-next-line:object-literal-sort-keys
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

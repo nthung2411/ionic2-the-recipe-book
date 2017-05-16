@@ -5,9 +5,9 @@ export class RecipesService {
     private recipes: Recipe[] = [];
 
     addRecipe(title: string,
-              description: string,
-              difficulty: string,
-              ingredients: Ingredient[]): void {
+        description: string,
+        difficulty: string,
+        ingredients: Ingredient[]): void {
         this.recipes.push(new Recipe(title, description, difficulty, ingredients));
     }
 
@@ -16,10 +16,10 @@ export class RecipesService {
     }
 
     editRecipe(title: string,
-               description: string,
-               difficulty: string,
-               ingredients: Ingredient[],
-               index: number): void {
+        description: string,
+        difficulty: string,
+        ingredients: Ingredient[],
+        index: number): void {
         this.recipes[index] = new Recipe(title, description, difficulty, ingredients);
     }
 
